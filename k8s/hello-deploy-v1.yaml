@@ -19,6 +19,6 @@ spec:
         version: v1
     spec:
       containers:
-      - image: core.apps.ocp.zyl.io/hello/hello:v1
+      - image: core.apps.ocp.zyl.io/hello/hello:v1-metrics
         imagePullPolicy: Always
         name: hello
