@@ -9,14 +9,15 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     hello_to = request.args.get('helloTo')
-    printer(formater(hello_to))
+    messages=formater(hello_to)
+    printer(messages)
+    return messages
 
 def formater(hello_to):
     return "Hello, {}".format(hello_to)
 
 def printer(messages):
     print(messages, flush=True)
-    return messages
 
 if __name__ == "__main__":
     app.run(host='::', port=_port, debug=True, threaded=True)
