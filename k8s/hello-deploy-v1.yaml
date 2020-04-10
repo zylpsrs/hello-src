@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   labels:
     app: hello
-    version: v1
-  name: hello-v1
+    version: v1-metrics
+  name: v1-metrics
   namespace: 
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: hello
-      version: v1
+      version: v1-metrics
   template:
     metadata:
       labels:
         app: hello
-        version: v1
+        version: v1-metrics
     spec:
       containers:
       - image: core.apps.ocp.zyl.io/hello/hello:v1-metrics
