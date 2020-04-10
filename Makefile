@@ -5,5 +5,5 @@ IMG ?= core.apps.ocp.zyl.io/hello/hello:$(IMAGE_VERSION)
 BUILDAH_FORMAT ?= docker
 
 all:
-	podman build -t $(IMG) .
-	podman push --authfile ~/pull-secret-2.json $(IMG)
+	podman build --format docker -t $(IMG) .
+	podman push --tls-verify=false --authfile ~/pull-secret-2.json $(IMG)
