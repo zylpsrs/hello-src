@@ -9,13 +9,12 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     hello_to = request.args.get('helloTo')
-    messages=formater(hello_to)
-    welcome(messages)
+    printer(formater(hello_to))
 
 def formater(hello_to):
     return "Hello, {}".format(hello_to)
 
-def welcome(messages):
+def printer(messages):
     print(messages, flush=True)
     return messages
 
