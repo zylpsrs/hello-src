@@ -9,10 +9,9 @@ spec:
   ports:
   - name: http
     port: 9080
-    targetPort: 9080
+    targetPort: web
     protocol: TCP
   selector:
     app: hello
-    version: v1.0
   sessionAffinity: None
   type: ClusterIP
