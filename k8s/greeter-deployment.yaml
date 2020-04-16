@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: greeter
+    version: v3.0
+  name: greeter-v3.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: greeter
+      version: v3.0
+  template:
+    metadata:
+      labels:
+        app: greeter
+        version: v3.0
+    spec:
+      containers:
+      - image: core.apps.ocp.zyl.io/greeter/greeter:v3.0
+        imagePullPolicy: Always
+        name: greeter
+        ports:
+        - name: web
+          containerPort: 9080
+          protocol: TCP
+        env:
+        - name: MESSAGE
+          value: 'Http Hello'
