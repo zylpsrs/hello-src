@@ -4,7 +4,7 @@ metadata:
   labels:
     app: hello
     version: v1.2
-  name: hello-v1.2
+  name: hello-v1-2
 spec:
   replicas: 1
   selector:
