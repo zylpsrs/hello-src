@@ -13,5 +13,6 @@ spec:
     protocol: TCP
   selector:
     app: hello
+    version: v1.0
   sessionAffinity: None
   type: ClusterIP

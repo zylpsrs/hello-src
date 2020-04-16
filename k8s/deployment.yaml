@@ -3,21 +3,25 @@ kind: Deployment
 metadata:
   labels:
     app: hello
-    version: v1
+    version: v1.0
   name: hello-v1
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: hello
-      version: v1
+      version: v1.0
   template:
     metadata:
       labels:
         app: hello
-        version: v1
+        version: v1.0
     spec:
       containers:
-      - image: registry.ocp.zyl.io:5000/hello:v1
+      - image: core.apps.ocp.zyl.io/hello/hello:v1.0
         imagePullPolicy: Always
         name: hello
+        ports:
+        - name: web
+          containerPort: 9080
+          protocol: TCP
