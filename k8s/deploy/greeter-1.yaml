@@ -3,21 +3,21 @@ kind: Deployment
 metadata:
   labels:
     app: greeter
-    version: v3.0
+    version: v3.0-1
   name: greeter-v3.0-1
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: greeter
-      version: v3.0
+      version: v3.0-1
   template:
     metadata:
       annotations:
         sidecar.istio.io/inject: "True"
       labels:
         app: greeter
-        version: v3.0
+        version: v3.0-1
     spec:
       containers:
       - image: core.apps.ocp.zyl.io/hello/greeter:v3.0

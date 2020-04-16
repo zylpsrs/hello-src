@@ -3,7 +3,6 @@ kind: Service
 metadata:
   labels:
     app: greeter
-    service: greeter
   name: greeter
 spec:
   ports:

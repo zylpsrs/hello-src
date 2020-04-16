@@ -3,7 +3,6 @@ kind: Service
 metadata:
   labels:
     app: publisher
-    service: publisher
   name: publisher
 spec:
   ports:
