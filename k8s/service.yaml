@@ -3,13 +3,12 @@ kind: Service
 metadata:
   labels:
     app: hello
-    service: hello
   name: hello
 spec:
   ports:
   - name: http
     port: 9080
-    targetPort: web
+    targetPort: 9080
     protocol: TCP
   selector:
     app: hello

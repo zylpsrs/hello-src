@@ -4,7 +4,7 @@ metadata:
   labels:
     app: hello
     version: v1.0
-  name: hello-v1.0
+  name: hello-v1-0
 spec:
   replicas: 1
   selector:
@@ -13,6 +13,8 @@ spec:
       version: v1.0
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
       labels:
         app: hello
         version: v1.0
@@ -22,6 +24,6 @@ spec:
         imagePullPolicy: Always
         name: hello
         ports:
-        - name: web
+        - name: http
           containerPort: 9080
           protocol: TCP
