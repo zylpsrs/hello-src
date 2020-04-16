@@ -4,7 +4,7 @@ metadata:
   labels:
     app: greeter
     version: v3.0-3
-  name: greeter-v3.0-3
+  name: greeter-v3-0-3
 spec:
   replicas: 1
   selector:
