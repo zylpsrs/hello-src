@@ -20,7 +20,7 @@ spec:
         version: v3.0
     spec:
       containers:
-      - image: core.apps.ocp.zyl.io/publisher/publisher:v3.0
+      - image: core.apps.ocp.zyl.io/hello/publisher:v3.0
         imagePullPolicy: Always
         name: publisher
         ports:
