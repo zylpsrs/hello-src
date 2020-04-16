@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello
+    version: v1.2
+  name: hello-v1.2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello
+      version: v1.2
+  template:
+    metadata:
+      labels:
+        app: hello
+        version: v1.2
+    spec:
+      containers:
+      - image: core.apps.ocp.zyl.io/hello/hello:v1.2
+        imagePullPolicy: Always
+        name: hello
+        ports:
+        - name: web
+          containerPort: 9080
+          protocol: TCP
+        env:
+        - name: MESSAGE
+          value: 'Hello, Metrics!'
