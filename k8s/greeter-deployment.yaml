@@ -13,6 +13,8 @@ spec:
       version: v3.0
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "True"
       labels:
         app: greeter
         version: v3.0
