@@ -1,0 +1,7 @@
+requests
+flask
+jaeger_client
+opentracing
+opentracing_instrumentation
+prometheus_flask_exporter
+tornado<6,>=4.1
