@@ -8,7 +8,7 @@ spec:
   ports:
   - name: http
     port: 9080
-    targetPort: web
+    targetPort: 9080
     protocol: TCP
   selector:
     app: greeter
