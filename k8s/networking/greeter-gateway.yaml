@@ -1,0 +1,38 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: greeter
+spec:
+  # use Istio default gateway implementation
+  selector:
+    istio: ingressgateway 
+  servers:
+  - port:
+      number: 80
+      name: http-80
+      protocol: HTTP
+    hosts:
+    - "greeter.example.com"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: greeter-1
+spec:
+  hosts:
+  - greeter.example.com
+  gateways:
+  - greeter
+  http:
+  - match:
+    - headers:
+        end-user:
+          exact: jason
+    route:
+    - destination:
+        host: greeter
+        subset: v3-0-3
+  - route:
+    - destination:
+        host: greeter
+        subset: v3-0-2

@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: greeter
+spec:
+  hosts:
+  - greeter
+  http:
+  - route:
+    - destination:
+        host: greeter
+        subset: v3-0-2
+    fault:
+      delay:
+        percentage:
+          value: 100.0
+        fixedDelay: 7s
