@@ -1,3 +1,5 @@
+from flask import request, session
+
 # A note on distributed tracing:
 #
 # Although Istio proxies are able to automatically send spans, they need some
@@ -16,7 +18,7 @@
 # x-b3-flags
 #
 
-def getForwardHeaders(request):
+def getForwardHeaders():
     headers = {}
 
     # We handle other (non x-b3-***) headers manually

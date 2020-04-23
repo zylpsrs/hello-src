@@ -25,13 +25,13 @@ spec:
   http:
   - match:
     - headers:
-        end-user:
+        user-agent:
           exact: jason
     route:
     - destination:
         host: hello
-        subset: v3-0-3
+        subset: v3-1
   - route:
     - destination:
         host: hello
-        subset: v3-1
+        subset: v3-0-3

@@ -1,9 +1,9 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: greeter
+  name: publisher
 spec:
-  host: greeter
+  host: publisher
   subsets:
   - name: v3-0-1
     labels:

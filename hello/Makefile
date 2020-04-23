@@ -1,4 +1,4 @@
-IMAGE_VERSION ?= v3.0
+IMAGE_VERSION ?= v3.1
 #IMG ?= registry.ocp.zyl.io:5000/hello:$(IMAGE_VERSION)
 IMG ?= core.apps.ocp.zyl.io/hello/hello:$(IMAGE_VERSION)
 
