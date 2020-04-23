@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: hello-gw
+  name: hello
 spec:
   selector:
     istio: ingressgateway 
@@ -16,10 +16,10 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: hello-gw
+  name: hello
 spec:
   hosts:
-  - '*'
+  - 'hello.example.com'
   gateways:
   - hello
   http:
@@ -34,4 +34,4 @@ spec:
   - route:
     - destination:
         host: hello
-        subset: v3-0-3
+        subset: v3-0

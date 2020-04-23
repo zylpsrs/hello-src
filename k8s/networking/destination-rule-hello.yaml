@@ -5,15 +5,9 @@ metadata:
 spec:
   host: hello
   subsets:
-  - name: v3-0-1
+  - name: v3-0
     labels:
-      version: v3.0-1
-  - name: v3-0-2
-    labels:
-      version: v3.0-2
-  - name: v3-0-3
-    labels:
-      version: v3.0-3
+      version: v3.0
   - name: v3-1
     labels:
       version: v3.1
