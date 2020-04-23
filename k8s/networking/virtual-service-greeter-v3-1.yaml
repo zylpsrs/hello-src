@@ -9,4 +9,4 @@ spec:
   - route:
     - destination:
         host: greeter
-        subset: v3-0-1
+        subset: v3-1

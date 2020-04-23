@@ -1,2 +1,3 @@
-requests
 flask
+requests
+prometheus_flask_exporter

@@ -1,9 +1,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: hello
+  name: hello-gw
 spec:
-  # use Istio default gateway implementation
   selector:
     istio: ingressgateway 
   servers:
@@ -12,12 +11,12 @@ spec:
       name: http-80
       protocol: HTTP
     hosts:
-    - "*"
+    - "hello.example.com"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: hello-1
+  name: hello-gw
 spec:
   hosts:
   - '*'
@@ -35,4 +34,4 @@ spec:
   - route:
     - destination:
         host: hello
-        subset: v3-0-2
+        subset: v3-1

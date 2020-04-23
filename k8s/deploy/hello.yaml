@@ -3,24 +3,24 @@ kind: Deployment
 metadata:
   labels:
     app: hello
-    version: v3.0
-  name: hello-v3-0
+    version: v3.1
+  name: hello-v3-1
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: hello
-      version: v3.0
+      version: v3.1
   template:
     metadata:
       annotations:
         sidecar.istio.io/inject: "True"
       labels:
         app: hello
-        version: v3.0
+        version: v3.1
     spec:
       containers:
-      - image: core.apps.ocp.zyl.io/hello/hello:v3.0
+      - image: core.apps.ocp.zyl.io/hello/hello:v3.1
         imagePullPolicy: Always
         name: hello
         ports:

@@ -3,24 +3,24 @@ kind: Deployment
 metadata:
   labels:
     app: publisher
-    version: v3.0
-  name: publisher-v3-0
+    version: v3.1
+  name: publisher-v3-1
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: publisher
-      version: v3.0
+      version: v3.1
   template:
     metadata:
       annotations:
         sidecar.istio.io/inject: "True"
       labels:
         app: publisher
-        version: v3.0
+        version: v3.1
     spec:
       containers:
-      - image: core.apps.ocp.zyl.io/hello/publisher:v3.0
+      - image: core.apps.ocp.zyl.io/hello/publisher:v3.1
         imagePullPolicy: Always
         name: publisher
         ports:

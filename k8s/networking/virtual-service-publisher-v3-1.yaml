@@ -9,8 +9,4 @@ spec:
   - route:
     - destination:
         host: publisher
-    fault:
-      abort:
-        percentage:
-          value: 100.0
-        httpStatus: 200
+        subset: v3-1
