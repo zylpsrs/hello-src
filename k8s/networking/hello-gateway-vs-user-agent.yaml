@@ -11,7 +11,7 @@ spec:
       name: http-80
       protocol: HTTP
     hosts:
-    - "hello.example.com"
+    - "*"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -19,7 +19,7 @@ metadata:
   name: hello
 spec:
   hosts:
-  - 'hello.example.com'
+  - '*'
   gateways:
   - hello
   http:
@@ -27,11 +27,16 @@ spec:
     - headers:
         user-agent:
           exact: jason
+      uri:
+        exact: /
+    route:
+    - destination:
+        host: hello
+        subset: v3-2
+  - match:
+    - uri:
+        exact: /
     route:
     - destination:
         host: hello
         subset: v3-1
-  - route:
-    - destination:
-        host: hello
-        subset: v3-0
