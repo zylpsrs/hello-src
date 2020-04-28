@@ -24,9 +24,19 @@ spec:
   - hello
   http:
   - match:
-    - uri:
+    - headers:
+        user-agent:
+          exact: jason
+      uri:
         exact: /
     route:
     - destination:
         host: hello
         subset: v3-2
+  - match:
+    - uri:
+        exact: /
+    route:
+    - destination:
+        host: hello
+        subset: v3-1

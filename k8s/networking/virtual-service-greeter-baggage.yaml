@@ -6,7 +6,15 @@ spec:
   hosts:
   - greeter
   http:
-  - route:
+  - match:
+    - headers:
+        baggage-user-agent:
+          exact: jason
+    route:
     - destination:
         host: greeter
         subset: v3-2
+  - route:
+    - destination:
+        host: greeter
+        subset: v3-1
