@@ -3,7 +3,8 @@ kind: Service
 metadata:
   labels:
     app: greeter
-  name: greeter
+    protos: grpc
+  name: greeter-grpc
 spec:
   ports:
   - name: http
@@ -12,5 +13,6 @@ spec:
     protocol: TCP
   selector:
     app: greeter
+    protos: grpc
   sessionAffinity: None
   type: ClusterIP

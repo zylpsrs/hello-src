@@ -8,6 +8,8 @@ from opentracing.ext import tags
 from opentracing.propagation import Format
 from opentracing_instrumentation.request_context import get_current_span, span_in_context
 
+from grpc_opentracing import ActiveSpanSource
+
 from jaeger_client import Config
 
 # ref: https://www.jaegertracing.io/docs/1.17/client-features
@@ -172,3 +174,9 @@ def get_forward_http_headers(tracer):
             #print("incoming: "+ihdr+":"+val)
 
     return headers
+
+# https://github.com/opentracing-contrib/python-grpc
+class active_span_source_usage_by_grpc(ActiveSpanSource):
+  @classmethod
+  def get_active_span(self):
+      return get_current_span()

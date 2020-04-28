@@ -5,3 +5,6 @@ Werkzeug
 jaeger-client
 opentracing
 opentracing-instrumentation
+grpcio
+grpcio-opentracing
+protobuf

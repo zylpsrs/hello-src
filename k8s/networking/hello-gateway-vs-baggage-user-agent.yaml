@@ -24,9 +24,26 @@ spec:
   - hello
   http:
   - match:
+    - headers:
+        user-agent:
+          regex: .*jason.*
     - uri:
         exact: /
     route:
+    - destination:
+        host: hello
+        subset: v4-0
+  - match:
+    - headers:
+        baggage-user-agent:
+          regex: .*jason.*
+    - uri:
+        exact: /
+    route:
+    - destination:
+        host: hello
+        subset: v4-0
+  - route:
     - destination:
         host: hello
         subset: v3-2

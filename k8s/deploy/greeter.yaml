@@ -3,24 +3,27 @@ kind: Deployment
 metadata:
   labels:
     app: greeter
-    version: v3.2
-  name: greeter-v3-2
+    version: v4.0
+    protos: grpc
+  name: greeter-v4-0
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: greeter
-      version: v3.2
+      version: v4.0
+      protos: grpc
   template:
     metadata:
       annotations:
         sidecar.istio.io/inject: "True"
       labels:
         app: greeter
-        version: v3.2
+        version: v4.0
+        protos: grpc
     spec:
       containers:
-      - image: core.apps.ocp.zyl.io/hello/greeter:v3.2
+      - image: core.apps.ocp.zyl.io/hello/greeter:v4.0
         imagePullPolicy: Always
         name: greeter
         ports:
@@ -29,7 +32,7 @@ spec:
           protocol: TCP
         env:
         - name: MESSAGE
-          value: 'Http V3.2 Hello'
+          value: 'Grpc V4.0 Hello'
         - name: JAEGER_ONE_SPAN_PER_RPC
           value: 'False'
       - name: jaeger-agent

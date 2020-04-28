@@ -1,13 +1,10 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: greeter
+  name: greeter-grpc
 spec:
-  host: greeter
+  host: greeter-grpc
   subsets:
-  - name: v3-1
+  - name: v4-0
     labels:
-      version: v3.1
-  - name: v3-2
-    labels:
-      version: v3.2
+      version: v4.0

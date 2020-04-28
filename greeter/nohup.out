@@ -1,6 +1,0 @@
-Failed to open connection to "session" message bus: /usr/bin/dbus-launch terminated abnormally without any error message
-Running without a11y support!
-Running Firefox as root in a regular user's session is not supported.  ($HOME is /root which is owned by zyl.)
-Failed to open connection to "session" message bus: /usr/bin/dbus-launch terminated abnormally without any error message
-Running without a11y support!
-Running Firefox as root in a regular user's session is not supported.  ($HOME is /root which is owned by zyl.)

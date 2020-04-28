@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: publisher
+spec:
+  hosts:
+  - publisher
+  http:
+  - match:
+    - headers:
+        baggage-user-agent:
+          regex: .*jason.*
+    - uri:
+        exact: /
+    route:
+    - destination:
+        host: hello
+        subset: v4-0
+  - route:
+    - destination:
+        host: hello
+        subset: v3-2

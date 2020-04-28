@@ -3,24 +3,24 @@ kind: Deployment
 metadata:
   labels:
     app: publisher
-    version: v3.2
-  name: publisher-v3-2
+    version: v4.0
+  name: publisher-v4-0
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: publisher
-      version: v3.2
+      version: v4.0
   template:
     metadata:
       annotations:
         sidecar.istio.io/inject: "True"
       labels:
         app: publisher
-        version: v3.2
+        version: v4.0
     spec:
       containers:
-      - image: core.apps.ocp.zyl.io/hello/publisher:v3.2
+      - image: core.apps.ocp.zyl.io/hello/publisher:v4.0
         imagePullPolicy: Always
         name: publisher
         ports:
@@ -29,7 +29,7 @@ spec:
           protocol: TCP
         env:
         - name: GREETER
-          value: 'http://greeter:9080'
+          value: 'greeter-grpc:9080'
         - name: JAEGER_ONE_SPAN_PER_RPC
           value: 'False'
       - name: jaeger-agent
