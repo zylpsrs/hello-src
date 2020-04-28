@@ -31,9 +31,7 @@ spec:
         - name: PUBLISHER
           value: 'http://publisher:9080'
         - name: GREETER
-          value: 'greeter-grpc:9080'
-        - name: JAEGER_ONE_SPAN_PER_RPC
-          value: 'False'
+          value: 'greeter-grpc.hello.svc.cluster.local:9080'
       - name: jaeger-agent
         image: jaegertracing/jaeger-agent:1.17.0
         imagePullPolicy: IfNotPresent

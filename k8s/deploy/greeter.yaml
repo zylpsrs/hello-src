@@ -27,14 +27,12 @@ spec:
         imagePullPolicy: Always
         name: greeter
         ports:
-        - name: web
+        - name: grpc
           containerPort: 9080
           protocol: TCP
         env:
         - name: MESSAGE
           value: 'Grpc V4.0 Hello'
-        - name: JAEGER_ONE_SPAN_PER_RPC
-          value: 'False'
       - name: jaeger-agent
         image: jaegertracing/jaeger-agent:1.17.0
         imagePullPolicy: IfNotPresent

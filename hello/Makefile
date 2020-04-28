@@ -1,4 +1,4 @@
-IMAGE_VERSION ?= v3.2
+IMAGE_VERSION ?= v4.0
 IMG ?= core.apps.ocp.zyl.io/hello/hello:$(IMAGE_VERSION)
 
 BUILDAH_FORMAT ?= docker

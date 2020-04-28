@@ -27,6 +27,7 @@ def pub():
     publisher('publisher: {}'.format(g_message))
     return g_message
 
+@flask_child_method_trace(tracer, "greeter")
 def greeter(_greeter, hello_to):
     interceptor = open_tracing_client_interceptor(tracer,
                     active_span_source=active_span_source_usage_by_grpc)

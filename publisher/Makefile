@@ -1,4 +1,4 @@
-IMAGE_VERSION ?= v3.2
+IMAGE_VERSION ?= v4.0
 #IMG ?= registry.ocp.zyl.io:5000/publisher:$(IMAGE_VERSION)
 IMG ?= core.apps.ocp.zyl.io/hello/publisher:$(IMAGE_VERSION)
 

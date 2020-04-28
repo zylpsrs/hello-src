@@ -7,8 +7,8 @@ COPY requirements.txt ./
 ENV INDEX_URL https://mirrors.aliyun.com/pypi/simple
 RUN pip install -i $INDEX_URL --no-cache-dir -r requirements.txt
 
-COPY lib/tracing.py ./lib/tracing.py
 COPY hello.py ./
+COPY lib/*.py ./lib/
 
 ENV PORT 9080
 

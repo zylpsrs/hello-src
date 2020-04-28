@@ -35,6 +35,7 @@ def publisher(url, param, value):
     assert r.status_code == 200
     return r.text
 
+@flask_child_method_trace(tracer, "greeter")
 def greeter(_greeter, hello_to):
     interceptor = open_tracing_client_interceptor(tracer,
                     active_span_source=active_span_source_usage_by_grpc)
