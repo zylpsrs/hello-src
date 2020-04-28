@@ -130,6 +130,14 @@ def flask_child_method_trace(tracer, op_name):
             p_span = get_current_span()
             c_span = tracer.start_span(operation_name=op_name, child_of=p_span)
 
+            incoming_headers = ['x-request-id', 'x-datadog-trace-id', 
+                                'x-datadog-parent-id', 'x-datadog-sampled']
+
+            for ihdr in incoming_headers:
+                val = request.headers.get(ihdr)
+                if val is not None:
+                   c_span.set_tag(ihdr, val)
+
             with span_in_context(c_span):
                 r = f(*args, **kwargs)
                 c_span.finish()
