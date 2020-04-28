@@ -9,7 +9,7 @@ RUN pip install -i $INDEX_URL --no-cache-dir -r requirements.txt
 
 ENV PORT 9080
 
-COPY lib/*      ./lib/
+COPY lib/tracing.py ./lib/tracing.py
 COPY greeter.py ./
 
 EXPOSE $PORT

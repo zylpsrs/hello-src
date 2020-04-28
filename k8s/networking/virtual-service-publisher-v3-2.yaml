@@ -6,15 +6,7 @@ spec:
   hosts:
   - publisher
   http:
-  - match:
-    - headers:
-        user-agent:
-          exact: jason
-    route:
-    - destination:
-        host: publisher
-        subset: v3-1
   - route:
     - destination:
         host: publisher
-        subset: v3-0
+        subset: v3-2

@@ -3,24 +3,24 @@ kind: Deployment
 metadata:
   labels:
     app: hello
-    version: v3.1
-  name: hello-v3-1
+    version: v3.2
+  name: hello-v3-2
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: hello
-      version: v3.1
+      version: v3.2
   template:
     metadata:
       annotations:
         sidecar.istio.io/inject: "True"
       labels:
         app: hello
-        version: v3.1
+        version: v3.2
     spec:
       containers:
-      - image: core.apps.ocp.zyl.io/hello/hello:v3.1
+      - image: core.apps.ocp.zyl.io/hello/hello:v3.2
         imagePullPolicy: Always
         name: hello
         ports:
@@ -32,3 +32,8 @@ spec:
           value: 'http://publisher:9080'
         - name: GREETER
           value: 'http://greeter:9080'
+        # ref: https://www.jaegertracing.io/docs/1.17/client-features
+        - name: JAEGER_AGENT_HOST
+          value: jaeger-agent.istio-system
+        - name: JAEGER_ONE_SPAN_PER_RPC
+          value: 'False'
