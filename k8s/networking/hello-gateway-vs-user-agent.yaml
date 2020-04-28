@@ -32,11 +32,11 @@ spec:
     route:
     - destination:
         host: hello
-        subset: v3-2
+        subset: v3-1
   - match:
     - uri:
         exact: /
     route:
     - destination:
         host: hello
-        subset: v3-1
+        subset: v3-0
