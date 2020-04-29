@@ -86,7 +86,7 @@ def flask_top_request_trace(tracer, op_name):
                 # a child span. It will use the incoming traceid and
                 # spanid. We do this to propagate the headers verbatim.
                 rpc_tag = {tags.SPAN_KIND: tags.SPAN_KIND_RPC_SERVER}
-                c_span = tracer.start_span(operation_name=op_name, child_of=p_span, tag=rpc_tag)
+                c_span = tracer.start_span(operation_name=op_name, child_of=p_span, tags=rpc_tag)
 
                 c_span.set_tag(tags.HTTP_METHOD, request.method)
                 c_span.set_tag(tags.HTTP_URL, request.base_url)
@@ -95,6 +95,7 @@ def flask_top_request_trace(tracer, op_name):
                 # incoming x-b3-*** headers. Start a fresh span.
                 c_span = tracer.start_span(op_name)
                 c_span.set_tag(tags.SPAN_KIND, tags.SPAN_KIND_RPC_CLIENT)
+                print('exception: {}'.format(e),flush=True)
 
             # current jaeger-client <4.3 not support baggage when using b3codec
             # ref: https://github.com/jaegertracing/jaeger/issues/755
