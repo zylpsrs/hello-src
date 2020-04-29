@@ -85,36 +85,24 @@ def flask_top_request_trace(tracer, op_name):
                 # Note: this tag means that the span will *not* be
                 # a child span. It will use the incoming traceid and
                 # spanid. We do this to propagate the headers verbatim.
-                #rpc_tag = {tags.SPAN_KIND: tags.SPAN_KIND_RPC_SERVER}
-                #c_span = tracer.start_span(operation_name=op_name, child_of=p_span, tag=rpc_tag)
+                rpc_tag = {tags.SPAN_KIND: tags.SPAN_KIND_RPC_SERVER}
+                c_span = tracer.start_span(operation_name=op_name, child_of=p_span, tag=rpc_tag)
 
-                c_span = tracer.start_span(operation_name=op_name, child_of=p_span)
-
-                c_span.set_tag(tags.COMPONENT, 'Flask')
                 c_span.set_tag(tags.HTTP_METHOD, request.method)
                 c_span.set_tag(tags.HTTP_URL, request.base_url)
-                c_span.set_tag(tags.SPAN_KIND, tags.SPAN_KIND_RPC_CLIENT)
             except Exception as e:
                 # We failed to create a context, possibly due to no
                 # incoming x-b3-*** headers. Start a fresh span.
-                # Note: This is a fallback only, and will create fresh headers,
-                # not propagate headers.
                 c_span = tracer.start_span(op_name)
-                c_span.set_tag(tags.SPAN_KIND, tags.SPAN_KIND_RPC_SERVER)
+                c_span.set_tag(tags.SPAN_KIND, tags.SPAN_KIND_RPC_CLIENT)
 
-            incoming_headers = ['x-request-id', 'x-datadog-trace-id', 
-                                'x-datadog-parent-id', 'x-datadog-sampled']
-
-            for ihdr in incoming_headers:
-                val = request.headers.get(ihdr)
-                if val is not None:
-                   c_span.set_tag(ihdr, val)
-
-            val = request.headers.get('user-agent')
-            if val is None:
-               c_span.get_baggage_item('internal_test_usage')
-            else:
-               c_span.get_baggage_item(val)
+            # current jaeger-client <4.3 not support baggage when using b3codec
+            # ref: https://github.com/jaegertracing/jaeger/issues/755
+            # when call inject and extrat method, the baggage will missing
+            #val = c_span.get_baggage_item('user-agent')
+            #if val is None:
+            #   val = request.headers.get('user-agent')
+            #   c_span.set_baggage_item('user-agent', val)
 
             with span_in_context(c_span):
                 r = f(*args, **kwargs)
@@ -130,14 +118,6 @@ def flask_child_method_trace(tracer, op_name):
             p_span = get_current_span()
             c_span = tracer.start_span(operation_name=op_name, child_of=p_span)
 
-            incoming_headers = ['x-request-id', 'x-datadog-trace-id', 
-                                'x-datadog-parent-id', 'x-datadog-sampled']
-
-            for ihdr in incoming_headers:
-                val = request.headers.get(ihdr)
-                if val is not None:
-                   c_span.set_tag(ihdr, val)
-
             with span_in_context(c_span):
                 r = f(*args, **kwargs)
                 c_span.finish()
@@ -150,13 +130,14 @@ def flask_child_method_trace(tracer, op_name):
 def get_forward_http_headers(tracer):
     headers = {}
 
-    # x-b3-*** headers can be populated using the opentracing span
+    # only x-b3-*** headers can be populated
     span = get_current_span()
+    span.set_tag(tags.SPAN_KIND, tags.SPAN_KIND_RPC_CLIENT)
     tracer.inject(span_context=span.context, format=Format.HTTP_HEADERS, carrier=headers)
 
     # We handle other (non x-b3-***) headers manually
-    #if 'user' in session:
-    #    headers['end-user'] = session['user']
+    if 'user' in session:
+        headers['end-user'] = session['user']
 
     # Add user-agent to headers manually
     if 'user-agent' in request.headers:

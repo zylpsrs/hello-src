@@ -32,8 +32,28 @@ spec:
           value: 'http://publisher:9080'
         - name: GREETER
           value: 'http://greeter:9080'
-        # ref: https://www.jaegertracing.io/docs/1.17/client-features
-        - name: JAEGER_AGENT_HOST
-          value: jaeger-agent.istio-system
         - name: JAEGER_ONE_SPAN_PER_RPC
-          value: 'False'
+          value: 'True'
+      - name: jaeger-agent
+        image: jaegertracing/jaeger-agent:1.17.0
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 5775
+            name: zk-compact-trft
+            protocol: UDP
+          - containerPort: 5778
+            name: config-rest
+            protocol: TCP
+          - containerPort: 6831
+            name: jg-compact-trft
+            protocol: UDP
+          - containerPort: 6832
+            name: jg-binary-trft
+            protocol: UDP
+          - containerPort: 14271
+            name: admin-http
+            protocol: TCP
+        args:
+          - --reporter.grpc.host-port=dns:///jaeger-collector-headless.istio-system:14250
+          - --reporter.type=grpc
+          - --log-level=debug
