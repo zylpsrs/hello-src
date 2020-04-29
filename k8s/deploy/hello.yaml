@@ -32,8 +32,6 @@ spec:
           value: 'http://publisher:9080'
         - name: GREETER
           value: 'http://greeter:9080'
-        - name: JAEGER_ONE_SPAN_PER_RPC
-          value: 'True'
       - name: jaeger-agent
         image: jaegertracing/jaeger-agent:1.17.0
         imagePullPolicy: IfNotPresent

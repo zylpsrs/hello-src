@@ -30,8 +30,6 @@ spec:
         env:
         - name: MESSAGE
           value: 'Http V3.2 Hello'
-        - name: JAEGER_ONE_SPAN_PER_RPC
-          value: 'True'
       - name: jaeger-agent
         image: jaegertracing/jaeger-agent:1.17.0
         imagePullPolicy: IfNotPresent

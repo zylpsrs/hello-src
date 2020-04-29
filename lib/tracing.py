@@ -10,9 +10,6 @@ from opentracing_instrumentation.request_context import get_current_span, span_i
 
 from jaeger_client import Config
 
-# ref: https://www.jaegertracing.io/docs/1.17/client-features
-_RPC = False if (os.environ.get("JAEGER_ONE_SPAN_PER_RPC") is None) else os.environ.get("JAEGER_ONE_SPAN_PER_RPC")
-
 # ref: https://github.com/jaegertracing/jaeger-client-python
 #      https://github.com/yurishkuro/opentracing-tutorial/tree/master/python
 def init_jaeger_tracer(service):
@@ -33,16 +30,7 @@ def init_jaeger_tracer(service):
     )
 
     # this call also sets opentracing.tracer
-    tracer = config.initialize_tracer()
-
-    # Zipkin shares span ID between client and server spans; 
-    # it must be enabled via the following option.
-    # when call start_span, it will set:
-    #     span_id = parent.span_id
-    #     parent_id = parent.parent_id
-    tracer.one_span_per_rpc = _RPC
-
-    return tracer
+    return config.initialize_tracer()
 
 # A note on distributed tracing:
 #
