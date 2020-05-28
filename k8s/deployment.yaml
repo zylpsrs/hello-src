@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hello
+    version: v1.0
+  name: hello-v1-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello
+      version: v1.0
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true"
+      labels:
+        app: hello
+        version: v1.0
+    spec:
+      containers:
+      - image: core.apps.ocp.zyl.io/hello/hello:v1.0
+        imagePullPolicy: Always
+        name: hello
+        ports:
+        - name: http
+          containerPort: 9080
+          protocol: TCP
